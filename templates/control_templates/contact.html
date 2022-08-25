@@ -1,0 +1,40 @@
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% load static %}
+
+{% block ctrl %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for mesaj in messages %}
+        <li{% if mesaj.tags %} class="{{ mesaj.tags }}"{% endif %}>{{ mesaj }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container">
+        <div class="row justify-content-around mt-5">
+          <div class="col-sm-9">
+               <h4><u>Send Quaries</u></h4></br>
+               <form action="" method="post">
+                    {% csrf_token %} 
+                    <div class=form-group>
+                         <label> Name: </label>
+                         {{ form.name }}</br>
+                         <label> Email: </label>
+                         {{ form.email }}</br>
+                         <label> Subject: </label>
+                         {{ form.subject }}</br>
+                         <label> Message: </label>
+                         {{ form.mesaj }}</br>
+                         <label> Date: </label>
+                         {{ form.date }}
+                    </div>
+                    <input type="submit" value="Send" class="btn btn-primary col-3">
+               </form>
+          </div>
+        </div>
+     </div>
+
+
+
+{% endblock ctrl %}

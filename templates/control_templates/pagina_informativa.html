@@ -1,0 +1,36 @@
+{% extends 'eVot_templates/meniu_navigare.html' %}
+{% load static %}
+
+{% block ctrl %}
+
+<div class="pagina_informativa">
+  <h2>Cititi instructiunile</h2>
+  <p>Vă rugăm să citiți aceste instrucțiuni înainte de a continua, vă va fi ușor să utilizați aplicația noastră web</p>
+  <ol>
+    <li>Capacitatea de a se asigura că numai alegătorii eligibili au voie/poate să voteze
+        - utilizarea unei anumite parole și a securității de conectare)
+        - lista curentă de alegători eligibili
+        - perioadă rezonabilă și anunțată (de exemplu, 2 săptămâni) pentru vot, care este destul de consecventă
+        pentru toate voturile, dacă nu specificate în proceduri; trimiteți memento înainte de încheierea perioadei de vot
+    </li>
+    <li>Anonimitate v. confidențialitate – dacă numărul 1 este îndeplinit, votul nu poate fi anonim.
+        Cu toate acestea, poate fi păstrată confidențial prin limitarea accesului la identitatea alegătorilor
+        la o sursă(e) de încredere. De exemplu, pentru alegerile pentru Senat, folosim Catalyst și numai secretarul facultății
+        și asistentul ei au acces la datele alegătorilor și au confidențialitate ca parte a fișei postului lor..
+        ați putea cere „casătorilor” să semneze un acord de confidențialitate dacă aceasta este o preocupare.
+    </li>
+    <li>Probleme reale de configurare a votului (Catalyst permite acest lucru): un alegător își poate schimba propriul vot
+        înainte de a fi exprimat/„trimis”; odată „trimis”, nici alegătorul și nici altcineva nu poate schimba votul;
+        o persoană nu poate vota mai mult de o dată
+    </li>
+    <li>Documentare, verificare și auditare – metodă de a asigura că un vot exprimat este într-adevăr numărat și
+        poate fi renumărat, dacă este necesar; cine a votat și cine nu a votat ca înregistrare publică;
+        alegătorul poate descoperi dacă votul său a fost schimbat (sau numărat greșit) și îl poate repara fără a distruge secretul votului
+    </li>
+    <li>Votul final este verificat și certificat de 2 persoane (de exemplu, voturile noastre sunt certificate
+        de către secretarul facultății și președintele Senatului) și raportat în scris alegătorilor/oficiului responsabil
+    </li>
+  </ol>
+</div>
+
+{% endblock ctrl %}

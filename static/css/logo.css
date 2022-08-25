@@ -1,0 +1,70 @@
+nav .logo
+{
+    text-align:center;
+    color: white;
+    padding: 6.8px 0;
+}
+
+@keyframes animation-text
+{
+    0% {opacity:0;}
+    40% {opacity:0;}
+    100% { opacity:1;}
+}
+
+@keyframes animation-left
+{
+    from {left: 30px;}
+    to { left: -30px;}
+}
+
+@keyframes animation-right
+{
+    from {right: 30px;}
+    to { right: -30px;}
+}
+
+.logo
+{
+    display:inline-block;
+    position:relative;
+    font-family:Arial;
+    cursor:pointer;
+    color: white;
+    margin: auto;
+}
+
+.logo .text
+{
+    color: white;
+    overflow: hidden;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    animation-name: animation-text;
+    animation-duration: 2s;
+}
+
+.left
+{
+    position: absolute;
+    left: -30px;
+    font-size: 70px;
+    line-height: 70px;
+    animation-name: animation-left;
+    animation-duration: 1.5s;
+    font-weight:bold;
+}
+
+.right
+{
+    position: absolute;
+    right: -30px;
+    font-size: 70px;
+    line-height: 70px;
+    animation-name: animation-right;
+    animation-duration: 1.5s;
+    font-weight:bold;
+}
+

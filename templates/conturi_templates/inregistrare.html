@@ -1,0 +1,59 @@
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+     <div class="container inregistrare">
+        <div class="row justify-content-around mt-5">
+          <div class="col-sm-4">
+               <h4><u>Înregistrează-te pentru a putea vota online. </u></h4></br>
+               <p>Autentifică-te <a href="{% url 'conturi:login' %}">AICI</a>  </p>
+               <form action="{% url 'conturi:inregistrare' %}" method="post" enctype="multipart/form-data">
+                   {% csrf_token %}
+                   {% load crispy_forms_tags %}
+
+                    <div class=form-group></br>
+                         <label> Identificatorul (CNP) </label></br>
+                         {{ form.username }}</br>
+                         <label> Nume </label></br>
+                         {{ form.last_name }}</br>
+                         <label> Prenume </label></br>
+                         {{ form.first_name }}</br>
+                         <label> Email </label></br>
+                         {{ form.email }}</br>
+                         {{ form.password1|as_crispy_field }}
+                         {{ form.password2|as_crispy_field }}
+                    </div></br>
+
+                    <div class=form-group></br>
+                         <u><h5> Completați. </h5></u></br>
+                         <label> GEN </label></br>
+                         {{ profil.gen }}</br>
+                         <label> Număr telefon </label></br>
+                         {{ profil.nr_telefon }}</br>
+                         <label> Data de naștere </label></br>
+                         {{ profil.data_nastere }}</br>
+                        <label> Localitate </label> </br>
+                        {{ profil.localitate }}</br>
+                        <label> Adresă </label> </br>
+                        {{ profil.adresa }}</br>
+                    </div>
+
+                    <div class=form-group></br>
+                         <u><h5> Verificare identitate </h5></u></br>
+                         <h6> Încarcăți poza sau versiunea scanată a cărții de identitate </h6></br>
+                         <label> Document Față </label>
+                         {{ profil.document_fata }}</br></br>
+                         <label> Document Verso </label>
+                         {{ profil.document_verso }}</br></br>
+                    </div>
+
+                    <input type="submit" value="Înregistrează-te" class="btn btn-primary col-5">
+               </form>
+          </div>
+        </div>
+     </div>
+</br>
+</br>
+</br>
+</br>
+</br>
+{% endblock content %}

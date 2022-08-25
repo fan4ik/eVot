@@ -1,0 +1,39 @@
+{% extends 'eVot_templates/meniu_navigare.html' %}
+{% load static %}
+
+{% block ctrl %}
+<center>
+    <h1> Rezultate: </h1>
+    <div id="container" style="width: 50%;">
+        <canvas id="pie-chart"></canvas>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+      <script>
+
+        var config = {
+          type: 'pie',
+          data: {
+            datasets: [{
+              data: {{ rezultate|safe }},
+              backgroundColor: [
+                '#E1C340', '#4CD7D0', '#189AB4', '#D4F1F4', '#007bff'
+              ],
+              label: 'Population'
+            }],
+            labels: {{ candidat|safe }}
+          },
+          options: {
+            responsive: true
+          }
+        };
+
+        window.onload = function() {
+          var ctx = document.getElementById('pie-chart').getContext('2d');
+          window.myPie = new Chart(ctx, config);
+        };
+
+      </script>
+
+</center>
+{% endblock ctrl %}

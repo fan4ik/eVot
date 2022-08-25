@@ -1,0 +1,11 @@
+{% extends 'eVote_templates/meniu_navigare.html' %}
+{% load static %}
+
+{% block ctrl %}
+
+    <div class="container text-center mt-5">
+        <h1> Ați votat deja! </h1>
+        <a href="{% url 'control:feedback' %}" class="btn btn-info"> Query </a>
+    </div>
+
+{% endblock ctrl %}

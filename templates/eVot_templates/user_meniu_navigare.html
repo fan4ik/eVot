@@ -1,0 +1,30 @@
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% load static %}
+
+{% block content %}
+    
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/control.css' %}">
+</head>
+<body>
+
+<div class="sidebar">
+  <a href="{% url 'control:ctrl' %}">Informații</a>
+  <a href="{% url 'control:voteaza' %}">Votează</a>
+  <a href="{% url 'control:rezultate' %}">Rezultate</a>
+  <a href="">Feedback</a>
+</div>
+
+{% block ctrl %}
+
+
+
+{% endblock ctrl %}
+
+</body>
+</html>
+
+
+{% endblock content %}

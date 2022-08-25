@@ -1,0 +1,30 @@
+.card-origin{
+    background-color:blue;
+    width: 1152px;
+    position: absolute;
+    top: 120px;
+    right: 0;
+    width: 1152px;
+    height: 500px;
+
+  }
+
+.cntr{
+    display:flex;
+    margin-left:230px;
+    margin-right:10px;
+    flex-wrap:wrap;
+    align-content: center
+  }
+
+.card-sep {
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.19);
+  }
+
+.img-sep {
+    padding-top: 10px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.19);
+  }

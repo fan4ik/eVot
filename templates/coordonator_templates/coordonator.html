@@ -1,0 +1,53 @@
+{% extends 'officer/officer_sidebar.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} adding sidebar {% endcomment %}
+ <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+<body>
+
+<div class="sidebar">
+  <a href="{% url 'officer:officercrud' %}">Officer Dash</a>
+  <a href="{% url 'officer:cand' %}">Candidates</a>
+  <a href="{% url 'officer:user' %}">Users</a>
+  <a href="{% url 'officer:quary' %}">User Quaries</a>
+  <a href="{% url 'officer:approve' %}">User Approves</a>
+</div>
+{% comment %} Finish sidebar {% endcomment %}
+
+<section class="container">
+
+<div class="row justify-content-around mt-3 text-center">
+    <div class="col-sm-8">
+        <h1> Welcome Officer </h1>
+        {% if status%}
+          <h4 style="color:green;margin-bottom: 25px;text-decoration: underline;">Election Started</h4>
+        {% else %}
+          <h4 style="color:red;margin-bottom: 25px;text-decoration: underline;">Election Ended</h4>
+        {%endif%}
+
+    </div>
+</div>
+
+<div class="container shadow text-center ">
+<h5> Total Users&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ usercount }} </h5>
+<h5> Total Candidates&nbsp;&nbsp;&nbsp;&nbsp;: {{ cancount }} </h5>
+<h5> User Quaries&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ quarycount }} </h5>
+</div>
+</br>
+</br>
+
+<div class="container row justify-content-center mt-3 text-center">
+  <h3 class="mr-3"> Control the Election :</h3>
+      {% if status%}
+          <a href="{% url 'officer:endelection' %}" class="btn btn-danger" id="end" >End Election</a>
+      {% else %}
+          <a href="{% url 'officer:startelection' %}" class="btn btn-success" id="start" >Start Election</a>
+      {%endif%}
+</div>
+
+</section>
+
+{% endblock content %}

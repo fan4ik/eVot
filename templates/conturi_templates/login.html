@@ -1,0 +1,18 @@
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% block content %}
+     <div class="container logare">
+          <div class="row justify-content-around mt-5">
+               <div class="col-sm-4">
+                    <h4><u> Autentificare </u></h4></br>
+                    {% load crispy_forms_tags %}
+                    <form action="{% url 'conturi:login' %}" method="post">
+                         {% csrf_token %}
+                         {{ form.username|as_crispy_field }}</br>
+                         {{ form.password|as_crispy_field }}
+                         <input type="submit" value="Autentifică-te" class="btn btn-primary col-5"></br></br>
+                         <p> Nu ai cont? <a href="{% url 'conturi:inregistrare' %}"> Înregistrează-te AICI. </a> </p>
+                    </form>
+               </div>
+          </div>
+     </div>
+{% endblock content %}

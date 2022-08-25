@@ -1,0 +1,29 @@
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row custom-section d-flex align-items-center">
+            <div class="float-container">
+
+              <div class="float-child txt">
+                  <h3>Votul tău contează!</h3>
+                  <p>Schimbarea începe cu tine.</p>
+              </div>
+
+              <div class="float-child buton_voteaza">
+                  {% if user.is_authenticated %}
+                    <a href="{% url 'control:ctrl' %}" >VOTEAZĂ ACUM</a>
+                  {% else %}
+                    <a href="{% url 'conturi:login' %}">VOTEAZĂ ACUM</a>
+                  {% endif %}
+              </div>
+
+            </div>
+
+            <div class="voteaza_img">
+                <img class="flag" src="{% static 'img/voteaza_img.png' %}" alt="vot electronic">
+            </div>
+        </div>
+    </div>
+{% endblock content %}
