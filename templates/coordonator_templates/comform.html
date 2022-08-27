@@ -1,0 +1,8 @@
+{% extends 'coordonator_templates/coordonator.html' %}
+{% load static %}
+
+{% block content %}
+    <p>Are you sure want to start Election ?</p>
+    <a href="{% url 'officer/' %}">No</a>
+    <a href="{% url 'officer:startelection' %}">Yes</a>
+{% endblock%}

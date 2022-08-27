@@ -30,6 +30,13 @@
 			<a href="{% url 'info' %}">Info</a>
 		</li>
 
+		{% load user_tags %}
+		{% if request.user|has_group:"Admin" %}
+		<li class="nav-item">
+			<a class="nav-link" href="{% url 'coordonator:officercrud' %}">Coordonator</a>
+		</li>
+		{% endif %}
+
 		{% if user.is_authenticated %}
 		<li class="nav-item">
 			<a href="{% url 'conturi:logout' %}">Ieșire</a>

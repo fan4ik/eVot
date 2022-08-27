@@ -18,11 +18,13 @@ class Profil(models.Model):
     document_fata = models.FileField(null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])])
     document_verso = models.FileField(null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])])
 
+    statut_UserAprobat = models.BooleanField(default=False)
+
     def __str__(self):
         return '%s %s' % (self.user.last_name, self.user.first_name)
 
     def isApproved(self):
-        return self.approvalStatus
+        return self.statut_UserAprobat
 
     def getApproved(self):
         self.approvalStatus = True

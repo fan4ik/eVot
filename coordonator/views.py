@@ -10,13 +10,14 @@ from .models import Alegere
 
 
 # Create your views here.
-@allowed_users(allowed_roles=['Admin', 'Coordonator'])
+#@allowed_users(allowed_roles=['Admin', 'Coordonator'])
 def coordonator(request):
+    print("coordonator.views.coordonator()")
     is_status = Alegere.objects.get(id=1)
     can_count = Candidat.objects.all().count()
     user_count = Profil.objects.all().count()
     quary_count = Feedback.objects.all().count()
-    return render(request, 'officer/officer.html', {
+    return render(request, 'coordonator_templates/coordonator.html', {
         'cancount': can_count,
         'usercount': user_count,
         'quarycount': quary_count,
@@ -156,3 +157,31 @@ def end_election(request):
     is_sts.save()
     return redirect('/officer/')
 
+@allowed_users(allowed_roles=['Admin', 'Staff'])
+def user_approval(request):
+    users = list(Profil.objects.all())
+    primaryKeys = [x.pk for x in users ]
+    for i in range(len(primaryKeys)) :
+        user_inst = Profil.objects.get(id=primaryKeys[i])
+        if user_inst.isApproved():
+            users.pop(i)
+    print(users)
+    return render(request,'officer/approve.html',{
+        'userdata':users
+    })
+
+
+@allowed_users(allowed_roles=['Admin', 'Staff'])
+def del_profile(request):
+    data = request.POST
+    id = data.get('id')
+    userdata = User.objects.get(id=id)
+    userdata.delete()
+    return redirect('/officer/approve/')
+
+@allowed_users(allowed_roles=['Admin', 'Staff'])
+def approve_profile(request, id):
+    user_inst = Profil.objects.get(id=id)
+    user_inst.getApproved()
+    user_inst.save()
+    return redirect('/officer/approve/')

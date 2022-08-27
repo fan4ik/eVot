@@ -7,8 +7,8 @@
                     {% load crispy_forms_tags %}
                     <form action="{% url 'conturi:login' %}" method="post">
                          {% csrf_token %}
-                         {{ form.username|as_crispy_field }}</br>
-                         {{ form.password|as_crispy_field }}
+                         {{ form.username }}</br>
+                         {{ form.password }}
                          <input type="submit" value="Autentifică-te" class="btn btn-primary col-5"></br></br>
                          <p> Nu ai cont? <a href="{% url 'conturi:inregistrare' %}"> Înregistrează-te AICI. </a> </p>
                     </form>

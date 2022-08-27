@@ -16,4 +16,7 @@ urlpatterns = [
     path('edituser/<int:id>/', views.edit_user, name="edituser"),
     path('electionstarted/', views.start_election, name="startelection"),
     path('electionended/', views.end_election, name="endelection"),
+    path('approve/', views.user_approval, name="approve"),
+    path('delprofile/', views.del_profile, name="delprofile"),
+    path('appProfile/<int:id>/', views.approve_profile, name="approveprofile"),
 ]

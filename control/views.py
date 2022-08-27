@@ -15,7 +15,8 @@ def control(request):
     try:
         user = request.user
         if str(user) == 'coordonator' or str(user) == 'admin':
-            return redirect('control:adminctrl')
+            print("control.views.control()")
+            return redirect('control:admin_ctrl')
         profile = Profil.objects.get(user=user)
         if profile.isApproved():
             return render(request, 'control_templates/pagina_informativa.html')
@@ -71,6 +72,7 @@ def rezultate(request):
 
 @login_required(login_url="/conturi/login")
 def admin_control(request):
+    print("control.views.admin_control()")
     return coordonator(request)
 
 def feedback(request):

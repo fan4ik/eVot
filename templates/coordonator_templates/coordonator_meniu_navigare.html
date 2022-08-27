@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% load static %}
+
 <body>
 
+<link rel="stylesheet" href="{% static 'css/coordonator.css' %}">
+
+<div class="sidebar">
+  <a href="{% url 'coordonator:officercrud' %}">Officer Dash</a>
+  <a href="{% url 'coordonator:cand' %}">Candidați</a>
+  <a href="{% url 'coordonator:user' %}">Utilizatori</a>
+  <a href="{% url 'coordonator:quary' %}">Cereri Feedback</a>
+  <a href="{% url 'coordonator:approve' %}">Aprobă</a>
+</div>
+
+
+{% block content %}
+
+{% endblock content %}
+
 </body>
-</html>

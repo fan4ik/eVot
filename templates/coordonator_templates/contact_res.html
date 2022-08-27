@@ -1,0 +1,84 @@
+{% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} adding sidebar {% endcomment %}
+ <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+<body>
+
+<div class="sidebar">
+  <a href="{% url 'officer:officercrud' %}">Officer Dash</a>
+  <a href="{% url 'officer:cand' %}">Candidates</a>
+  <a href="{% url 'officer:user' %}">Users</a>
+  <a href="{% url 'officer:quary' %}">User Quaries</a>
+  <a href="{% url 'officer:approve' %}">User Approves</a>
+</div> 
+{% comment %} Finish sidebar {% endcomment %}
+
+<section class="container">
+
+<div class="row justify-content-around mt-3 text-center">
+    <div class="col-sm-8">
+        <h1> Quaries Data </h1>
+    </div>
+</div>
+
+
+<div class="row justify-content-around mt-1 text-center">
+    <div class="col-sm-10">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">message</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for que in quariesdata %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{que.name}}</td>
+                    <td>{{que.email}}</td>
+                    <td>{{que.subject}}</td>
+                    <td>{{que.message}}</td>
+                    <td>{{que.date}}</td>
+                    <td>
+                        <form action={% url 'officer:quarysolved' %} method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{que.id}}>
+                        <input type="submit" value="Solved" class="btn-sm btn-info">
+                        </form>
+                    </td>
+
+                    <td>
+                        {% comment %} <a href="{% url 'officer:editcand' cand.id %}" class="btn btn-sm btn-info">Edit</a> {% endcomment %}
+
+                        {% comment %} <form action={% url 'officer:editcand' cand.id %}>
+                        {% csrf_token %}
+                        <input type="submit" value="Edit" class="btn-sm btn-info">
+                        </form> {% endcomment %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
+
+{% load static %}
+
+{% block content %}
+{% comment %} adding sidebar {% endcomment %}
+ <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+<body>
+
+<!--
+<div class="sidebar">
+  <a href="{% url 'officer:officercrud' %}">Officer Dash</a>
+  <a href="{% url 'officer:cand' %}">Candidates</a>
+  <a href="{% url 'officer:user' %}">Users</a>
+  <a href="{% url 'officer:quary' %}">User Quaries</a>
+  <a href="{% url 'officer:approve' %}">User Approves</a>
+</div>
+-->
+
+<div style="padding-left: 200px;">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">S.no</th>
+                <th scope="col">User</th>
+                <th scope="col">Email</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for udata in userdata %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{udata.user}}</td>
+                <td>{{udata.user.email}}</td>
+                {% if udata.user_image %}
+                    <td><img src="{{ udata.user_image.url }}" alt="Image" class="prod-size"></td>
+                {% else %}
+                <!-- <td><img src="{% static 'media/no-pic.png' %}" alt="Image" class="prod-size"></td> -->
+                <td>No Image</td>
+                {% endif %}
+                <td>
+                    <form action={% url 'officer:delprofile' %} method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{udata.user.id}}>
+                        <input type="submit" value="Delete" class="btn btn-sm btn-danger">
+                        </form>
+                </td>
+                <td>
+                    {% comment %} <a href="{% url 'officer:editcand' cand.id %}" class="btn btn-sm btn-info">Edit</a> {% endcomment %}
+
+                    <form action={% url 'officer:approveprofile' udata.id %}>
+                    {% csrf_token %}
+                    <input type="submit" value="Approve" class="btn-sm btn-info">
+                    </form>
+                </td>
+                
+                <td>
+            <tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}

@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('info/', views.info, name='info'),
     path('conturi/', include('conturi.urls')),
-    path('control/', include('control.urls'))
+    path('control/', include('control.urls')),
+    path('coordonator/', include('coordonator.urls'))
 ]

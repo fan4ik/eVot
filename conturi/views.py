@@ -14,6 +14,7 @@ def autentificareUser(request, user, authenticatedPage):
     try:
         if str(user) == 'coordonator' or str(user) == 'admin':
             login(request, user)
+            print("conturi.views.autentificareUser()")
             return redirect('control:admin_ctrl')
 
         profil = Profil.objects.get(user=user)
@@ -30,14 +31,12 @@ def autentificareUser(request, user, authenticatedPage):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return autentificareUser(request, user, 'control:ctrl') ### AICI in loc de request.user la el e doar user
+        return autentificareUser(request, request.user, 'control:ctrl') ### AICI in loc de request.user la el e doar user
 
     if request.method == 'POST':
-        print("AICI 1")
         form = CustomAuthenticationForm(data=request.POST) ### AICI la el e alt form
         if form.is_valid():
             user = form.get_user()
-            print("AICI 2")
             return autentificareUser(request, user, 'control:ctrl')
     else:
         form = CustomAuthenticationForm()
