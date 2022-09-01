@@ -1,11 +1,11 @@
-{% extends 'eVot_templates/sablon_de_baza.html' %}
+{% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
 {% load static %}
 
-{% block content %}
+{% block coordonator_content %}
 <section class="container">
 <div class="row justify-content-around mt-3 text-center">
     <div class="col-sm-8">
-        <h1> Edit Candidate </h1>
+        <h1> Editează Candidat </h1>
     </div>
 </div>
 
@@ -14,11 +14,11 @@
         <form action="" method="POST" class="bg-white p-3 rounded shadow" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" value="Submit" class="btn btn-primary">
+            <input type="submit" value="Modifică" class="btn btn-primary">
         </form>
     </div>
 </div>
 
 </section>
 
-{% endblock content %}
+{% endblock coordonator_content %}

@@ -1,90 +1,69 @@
 {% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
 {% load static %}
 
-{% block content %}
-
-{% comment %} adding sidebar {% endcomment %}
- <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% block coordonator_content %}
 
 <body>
-
-<!--
-<div class="sidebar">
-  <a href="{% url 'officer:officercrud' %}">Officer Dash</a>
-  <a href="{% url 'officer:cand' %}">Candidates</a>
-  <a href="{% url 'officer:user' %}">Users</a>
-  <a href="{% url 'officer:quary' %}">User Quaries</a>
-  <a href="{% url 'officer:approve' %}">User Approves</a>
-</div>
-{% comment %} Finish sidebar {% endcomment %}
--->
 
 <section class="container">
 
 <div class="row justify-content-around mt-3 text-center">
     <div class="col-sm-8">
-        <h1> User Data </h1>
+        <h1> Date Utilizatori </h1>
     </div>
 </div>
 
-
-{% comment %} CRUD for USER start here {% endcomment %}
-{% comment %} <div class="row justify-content-around">
+<!--
+<div class="row justify-content-around">
     <div class="col-sm-10">
-        <a href="{% url 'officer:adduser' %}" class="btn btn-primary float-right">Add User</a>
+        <a href="" class="btn btn-primary float-right">Adaugă Utilizator</a>
     </div>
-</div> {% endcomment %}
+</div>
+-->
 
 <div class="row justify-content-around mt-1 text-center">
     <div class="col-sm-10">
-        <table class="table table-hovers">
+        <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">S.no</th>
-                <th scope="col">User</th>
-                <th scope="col">Fname</th>
-                <th scope="col">Lname</th>
+                <th scope="col">Nr.</th>
+                <th scope="col">Username</th>
+                <th scope="col">Prenume</th>
+                <th scope="col">Nume</th>
                 <th scope="col">Email</th>
-                <th scope="col">Action</th>
+                <th scope="col">Id</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
             </tr>
         </thead>
         <tbody>
-                {% for udata in userdata %}
+            {% for user in utilizatori %}
             <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{udata.user}}</td>
-                <td>{{udata.user.first_name}}</td>
-                <td>{{udata.user.last_name}}</td>
-                <td>{{udata.user.email}}</td>
-                <td>{{udata.user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.id}}</td>
                 <td>
-                    <form action={% url 'officer:deluser' %} method="POST">
+                    <form action={% url 'coordonator:sterge_user' %} method="POST">
                         {% csrf_token %}
-                        <input type="hidden" name="id" value={{udata.user.id}}>
-                        <input type="submit" value="Delete" class="btn btn-sm btn-danger">
-                        </form>
+                        <input type="hidden" name="id" value={{user.id}}>
+                        <input type="submit" value="Șterge" class="btn btn-sm btn-danger">
+                    </form>
                 </td>
                 <td>
-                        {% comment %} <a href="{% url 'officer:editcand' cand.id %}" class="btn btn-sm btn-info">Edit</a> {% endcomment %}
-
-                        <form action={% url 'officer:edituser' udata.user.id %}>
+                    <form action={% url 'coordonator:edit_user' user.id %}>
                         {% csrf_token %}
-                        <input type="submit" value="Edit" class="btn-sm btn-info">
-                        </form>
-                    </td>
+                        <input type="submit" value="Editează" class="btn-sm btn-info">
+                    </form>
+                </td>
             </tr>
-                {% endfor %}
+            {% endfor %}
         </tbody>
         </table>
     </div>
 </div>
-{% comment %} CRUD user end here {% endcomment %}
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
 </section>
 
-{% endblock content %}
+{% endblock coordonator_content %}

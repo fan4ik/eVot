@@ -1,4 +1,4 @@
-{% extends 'eVot_templates/meniu_navigare.html' %}
+{% extends 'eVot_templates/user_meniu_navigare.html' %}
 {% load static %}
 
 {% block ctrl %}
@@ -6,8 +6,8 @@
     <div class="container text-center mt-5">
         <h1> Procesul de votare nu a început încă. </h1>
         <h5> Vă propunem să consultați următoarele secțiuni: </h5></br></br>
-        <a href="" class="btn btn-info"> Despre </a>
-        <a href="" class="btn btn-info"> Rezultate </a>
+        <a href="{% url 'control:ctrl' %}" class="btn btn-info"> Despre </a>
+        <a href="{% url 'control:rezultate' %}" class="btn btn-info"> Rezultate </a>
      </div>
 
 {% endblock ctrl %}

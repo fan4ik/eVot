@@ -1,4 +1,4 @@
-{% extends 'eVot_templates/meniu_navigare.html' %}
+{% extends 'eVot_templates/user_meniu_navigare.html' %}
 {% load static %}
 
 {% block ctrl %}
@@ -16,9 +16,7 @@
           data: {
             datasets: [{
               data: {{ rezultate|safe }},
-              backgroundColor: [
-                '#E1C340', '#4CD7D0', '#189AB4', '#D4F1F4', '#007bff'
-              ],
+              backgroundColor: ['#E1C340', '#4CD7D0', '#189AB4', '#D4F1F4', '#007bff'],
               label: 'Population'
             }],
             labels: {{ candidat|safe }}

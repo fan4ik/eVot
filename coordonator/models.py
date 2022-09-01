@@ -1,7 +1,10 @@
 from django.db import models
 
 class Alegere(models.Model):
-    status = models.BooleanField(default=False)
+    status_Alegere = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Alegeri"
 
     def __bool__(self):
-        return self.status
+        return self.status_Alegere

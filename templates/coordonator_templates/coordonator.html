@@ -1,25 +1,14 @@
 {% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
 {% load static %}
 
-{% block content %}
 
+{% block coordonator_content %}
 <link rel="stylesheet" href="{% static 'css/control.css' %}">
-
-
-<!--
-<div class="sidebar">
-  <a href="{% url 'coordonator:officercrud' %}">Officer Dash</a>
-  <a href="{% url 'coordonator:cand' %}">Candidates</a>
-  <a href="{% url 'coordonator:user' %}">Users</a>
-  <a href="{% url 'coordonator:quary' %}">User Quaries</a>
-  <a href="{% url 'coordonator:approve' %}">User Approves</a>
-</div>
--->
 
 
 <section class="container">
 
-<div class="row justify-content-around mt-3 text-center">
+<div class="row justify-content-around text-center">
     <div class="col-sm-8">
         <h1> Autentificat în calitate de Coordonator. </h1>
         {% if status %}
@@ -27,27 +16,24 @@
         {% else %}
           <h4 style="color:red;margin-bottom: 25px;text-decoration: underline;">Alegerile s-au terminat.</h4>
         {%endif%}
-
     </div>
 </div>
 
-<div class="container shadow text-center ">
-<h5> Total Utilizatori&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ usercount }} </h5>
-<h5> Total Candidați&nbsp;&nbsp;&nbsp;&nbsp;: {{ cancount }} </h5>
-<h5> Cereri Feedback&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ quarycount }} </h5>
-</div>
-</br>
-</br>
+<div class="control text-center ">
+<h5> Utilizatori: {{ usercount }} </h5>
+<h5> Candidați: {{ cancount }} </h5>
+<h5> Cereri Feedback: {{ quarycount }} </h5>
+</div> <br>
 
-<div class="container row justify-content-center mt-3 text-center">
+<div class="control text-center">
   <h3 class="mr-3"> Punct de control:</h3>
-      {% if status%}
+      {% if status_Alegere %}
           <a href="{% url 'coordonator:endelection' %}" class="btn btn-danger" id="end" > Stop Alegeri</a>
       {% else %}
           <a href="{% url 'coordonator:startelection' %}" class="btn btn-success" id="start" >Start Alegeri</a>
-      {%endif%}
+      {% endif %}
 </div>
 
 </section>
 
-{% endblock content %}
+{% endblock coordonator_content %}

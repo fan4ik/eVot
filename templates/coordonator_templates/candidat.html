@@ -1,0 +1,65 @@
+{% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
+{% load static %}
+
+{% block coordonator_content %}
+
+
+
+<body>
+
+<section class="container">
+
+<div class="row justify-content-around mt-3 text-center">
+    <div class="col-sm-8">
+        <h1> Date Candidați </h1>
+    </div>
+</div>
+
+<div class="row justify-content-around">
+    <div class="col-sm-10">
+        <a href="{% url 'coordonator:addcand' %}" class="btn btn-primary float-right">Adaugă Candidat</a>
+    </div>
+</div>
+
+<div class="row justify-content-around mt-1 text-center">
+    <div class="col-sm-10">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nr.</th>
+                    <th scope="col">Nume</th>
+                    <th scope="col">Echipa</th>
+                    <th scope="col">Șterge</th>
+                    <th scope="col">Editează</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for candidat in candidati_date %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{candidat.nume}}</td>
+                    <td>{{candidat.echipa}}</td>
+                    <td>
+                        <form action={% url 'coordonator:delcand' %} method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{candidat.id}}>
+                        <input type="submit" value="Șterge" class="btn-sm btn-danger">
+                        </form>
+                    </td>
+                    <td>
+                        {% comment %} <a href="{% url 'coordonator:editcand' candidat.id %}" class="btn btn-sm btn-info">Edit</a> {% endcomment %}
+
+                        <form action={% url 'coordonator:edit_candidat' candidat.id %}>
+                        {% csrf_token %}
+                        <input type="submit" value="Editează" class="btn-sm btn-info">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+
+{% endblock coordonator_content %}

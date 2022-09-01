@@ -4,17 +4,16 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.models import Group
-from .forms import UtilizatorForm, inregistrare_form
+from .forms import *
 from django import forms
 from .forms import CustomAuthenticationForm
-from .models import Profil
+from .models import *
 from control.forms import FeedbackForm
 
 def autentificareUser(request, user, authenticatedPage):
     try:
-        if str(user) == 'coordonator' or str(user) == 'admin':
+        if 'coordonator' in str(user) or str(user) == 'admin':
             login(request, user)
-            print("conturi.views.autentificareUser()")
             return redirect('control:admin_ctrl')
 
         profil = Profil.objects.get(user=user)
@@ -50,7 +49,6 @@ def logout_view(request):
     return redirect('pagina_de_start')
 
 def inregistrare_view(request):
-
     if request.method == 'POST':
         user_form = UtilizatorForm(request.POST)
         profil_form = inregistrare_form(data=request.POST, files=request.FILES)
@@ -113,4 +111,4 @@ def feedback_view(request):
             return render(request, 'conturi_templates/user_neacceptat.html')
     else:
         form = FeedbackForm()
-    return render(request, 'accounts/feedback.html', {'form': form})
+    return render(request, 'conturi_templates/feedback.html', {'form': form})

@@ -15,7 +15,6 @@ def control(request):
     try:
         user = request.user
         if str(user) == 'coordonator' or str(user) == 'admin':
-            print("control.views.control()")
             return redirect('control:admin_ctrl')
         profile = Profil.objects.get(user=user)
         if profile.isApproved():
@@ -31,7 +30,7 @@ def control(request):
 def voteaza(request):
     alegere = Alegere.objects.get(id=1)
 
-    if alegere.status == True:
+    if alegere.status_Alegere == True:
         candidati = Candidat.objects.all()
         return render(request, 'control_templates/voteaza.html', {'candidati': candidati})
     else:
@@ -39,28 +38,29 @@ def voteaza(request):
 
 # @login_required(login_url="/accounts/submitvote")
 def votare(request, pk):
-    nume_candidat_votat = Candidat.objects.get(id=pk)
-    alegator_token = Profil.objects.get(user=request.user)
-    token = alegator_token.token
-    try:
-        if (token in lista_votanti):
-            return render(request, 'control_templates/AmVotatDeja.html')
-        else:
-            lista_votanti.append(token)
-            hashr = functions.Transactions(nume_candidat_votat, alegator_token.token)
-            print(hashr)
-            return render(request, 'control_templates/AmVotat_Succes.html')
-    except:
+    candidat = Candidat.objects.get(id=pk)
+    alegator = Profil.objects.get(user=request.user)
+    token = alegator.token
+    print("TOKEN: ", token)
+    print("VOTANTI: ", lista_votanti)
+    print("TRY")
+    if (token in lista_votanti):
         return render(request, 'control_templates/AmVotatDeja.html')
+    else:
+        lista_votanti.append(token)
+        hashr = functions.Transactions(candidat, alegator.token)
+        print('HASHR: ', hashr)
+        return render(request, 'control_templates/AmVotat_Succes.html')
 
 
 def rezultate(request):
     alegere = Alegere.objects.get(id=1)
-    if (alegere.status):
+    if (alegere.status_Alegere):
         return render(request, 'control_templates/rezultate_null.html')
     else:
         try:
             rezultate = functions.rezultate_finale()
+            print(">>>>>>> REZULTATE: ", rezultate)
         except:
             print('Eroare la control:rezultate')
             return render(request, 'control_templates/rezultate_null.html')
@@ -72,7 +72,6 @@ def rezultate(request):
 
 @login_required(login_url="/conturi/login")
 def admin_control(request):
-    print("control.views.admin_control()")
     return coordonator(request)
 
 def feedback(request):
@@ -81,7 +80,7 @@ def feedback(request):
         if f.is_valid():
             f.save()
             messages.add_message(request, messages.INFO, 'Feedback Submitted.')
-            return render(request, 'dashboard.html')
+            return render(request, 'control_templates/pagina_informativa.html')
     else:
         f = FeedbackForm()
-    return render(request, 'contact.html', {'form': f})
+    return render(request, 'control_templates/contact.html', {'form': f})

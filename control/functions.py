@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from web3 import Web3
 from coordonator.models import Alegere
 from control.models import Candidat
@@ -21,6 +19,7 @@ for candidat in Candidat.objects.all():
 data = json.load(open("build/contracts/eVOT_Contract.json", "r"))
 
 abi = data['abi']
+print('ABI: ', abi)
 deployedBytecode = data["deployedBytecode"]
 print("==================>>>: ", data['networks']['5777']['address'])
 adresa = web3.toChecksumAddress(data['networks']['5777']['address'])
@@ -33,18 +32,18 @@ MyContract = web3.eth.contract(abi=abi,
 # iau conturile curente de la ganache
 conturi = web3.eth.accounts
 
-tx = {'from': conturi[7]}
-tx_for_vote = {'from': conturi[3]}
+tx = {'from': conturi[3]}
+#tx_for_vote = {'from': conturi[3]}
 
 def adauga_Candidat(candidati):
     alegere = Alegere.objects.get(id=1)
-    if (alegere.status):
+    if (alegere.status_Alegere):
         print("Candidatul a fost deja adăugat pe blockchain!")
     else:
         for candidat in candidati:
-            print('Candidatul a fost adăugat.', candidat.name)
-            MyContract.functions.adaugaCandidat(candidat.name).transact(tx)
-        alegere.status = True
+            print('Candidatul a fost adăugat.', candidat.nume)
+            MyContract.functions.adaugaCandidat(candidat.nume).transact(tx)
+        alegere.status_Alegere = True
         alegere.save()
 
 
@@ -52,22 +51,22 @@ def conturi_noi():
     return conturi[0]
 
 
-def Transactions(nume_alegator, alegator_token):
+def Transactions(candidat_votat, alegator_token):
     print("Transactions is up")
     for i in range(len(lista_Candidati)):
         print(lista_Candidati[i])
-        if str(lista_Candidati[i]) == str(nume_alegator):
+        if str(lista_Candidati[i]) == str(candidat_votat):
             tx_vote = {'from': alegator_token}
             print(tx_vote)
-            MyContract.functions.vote(i + 1).transact(tx_vote)
-            print("Voted for :", i + 1, lista_Candidati[i])
+            MyContract.functions.voteaza(i + 1).transact(tx_vote)
+            print("Ați votat pentru: ", i + 1, lista_Candidati[i])
 
 
 def rezultate_finale():
     rezultate = {}
     rezultat_candidat = []
     for x in range(1, len(lista_Candidati) + 1):
-        rezultat_candidat.append(MyContract.functions.getResult(x).call(tx))
+        rezultat_candidat.append(MyContract.functions.getRezultate(x).call(tx))
     rezultate['candidati'] = lista_Candidati
     rezultate['nr_voturi'] = rezultate
     print("Rezultate: ", rezultate)

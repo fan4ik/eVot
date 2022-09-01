@@ -1,0 +1,52 @@
+{% extends 'coordonator_templates/coordonator_meniu_navigare.html' %}
+
+{% load static %}
+
+{% block coordonator_content %}
+
+<body>
+
+<section class="container">
+    <div class="content_container">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Nr.</th>
+                <th scope="col">User</th>
+                <th scope="col">Email</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilizator in listaUtilizatori_aprobare %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{utilizator.user}}</td>
+                <td>{{utilizator.user.email}}</td>
+                {% if utilizator.user_image %}
+                    <td><img src="{{ utilizator.user_image.url }}" alt="Image" class="prod-size"></td>
+                {% else %}
+                <td>No Image</td>
+                {% endif %}
+                <td>
+                    <form action={% url 'coordonator:delprofile' %} method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{utilizator.user.id}}>
+                        <input type="submit" value="Refuză" class="btn btn-sm btn-danger">
+                        </form>
+                </td>
+                <td>
+                    <form action={% url 'coordonator:approveprofile' utilizator.id %}>
+                    {% csrf_token %}
+                    <input type="submit" value="Aprobă" class="btn-sm btn-info">
+                    </form>
+                </td>
+                
+                <td>
+            <tr>
+        {% endfor %}
+    </table>
+    </div>
+</section>
+
+{% endblock coordonator_content %}

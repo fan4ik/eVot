@@ -1,12 +1,11 @@
-{% extends 'eVot_templates/user_meniu_navigare.html' %}
-{% load static %}
+{% extends 'eVot_templates/sablon_de_baza.html' %}
 
-{% block ctrl %}
+{% block content %}
 
     {% if messages %}
     <ul class="messages">
         {% for mesaj in messages %}
-        <li{% if mesaj.tags %} class="{{ mesaj.tags }}"{% endif %}>{{ mesaj }}</li>
+        <li> {% if mesaj.tags %} class="{{ mesaj.tags }}"{% endif %}>{{ mesaj }}</li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -14,10 +13,10 @@
     <div class="container">
         <div class="row justify-content-around mt-5">
           <div class="col-sm-9">
-               <h4><u>Feedback</u></h4></br>
+              <h4><u>Feedback</u></h4></br>
               {% load crispy_forms_tags %}
-               <form action="" method="post">
-                    {% csrf_token %} 
+              <form action="" method="post">
+                    {% csrf_token %}
                     <div class=form-group>
                          {{ form.nume|as_crispy_field }}</br>
                          {{ form.email|as_crispy_field }}</br>
@@ -26,11 +25,11 @@
                          {{ form.date|as_crispy_field }}
                     </div>
                     <input type="submit" value="Trimite" class="btn btn-primary col-3">
-               </form>
+              </form>
           </div>
         </div>
      </div>
 
 
 
-{% endblock ctrl %}
+{% endblock  %}

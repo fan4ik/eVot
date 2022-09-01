@@ -1,21 +1,26 @@
 {% extends 'eVot_templates/sablon_de_baza.html' %}
 {% load static %}
 
-<body>
-
-<link rel="stylesheet" href="{% static 'css/coordonator.css' %}">
-
-<div class="sidebar">
-  <a href="{% url 'coordonator:officercrud' %}">Officer Dash</a>
-  <a href="{% url 'coordonator:cand' %}">Candidați</a>
-  <a href="{% url 'coordonator:user' %}">Utilizatori</a>
-  <a href="{% url 'coordonator:quary' %}">Cereri Feedback</a>
-  <a href="{% url 'coordonator:approve' %}">Aprobă</a>
-</div>
-
-
 {% block content %}
 
-{% endblock content %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/coordonator.css' %}">
+  <link rel="stylesheet" href="{% static 'css/control.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tabel.css' %}">
+</head>
 
-</body>
+<div class="sidebar">
+  <a href="{% url 'coordonator:officercrud' %}">Control</a>
+  <a href="{% url 'coordonator:candidati' %}">Candidați</a>
+  <a href="{% url 'coordonator:user' %}">Utilizatori</a>
+  <a href="{% url 'coordonator:feedback' %}">Cereri Feedback</a>
+  <a href="{% url 'coordonator:aproba' %}">Aprobă</a>
+</div>
+
+{% block coordonator_content %}
+
+{% endblock coordonator_content %}
+
+
+{% endblock content %}

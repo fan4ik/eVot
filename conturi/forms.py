@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
-# Am redenumit username si password
+# Am redenumit label-ul pentru username si password
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(request=None, *args, **kwargs)

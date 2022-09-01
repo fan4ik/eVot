@@ -5,7 +5,19 @@ body {
 .container {
 	position: relative;
 	margin-top: 100px;
+	margin-left: 400px;
+	width: 1200px;
 }
+
+.row {
+    padding-top: 25px;
+}
+
+.content_container{
+    display: grid;
+    align-content: center;
+}
+
 .container img {
 	display: block;
 	width: 100%;

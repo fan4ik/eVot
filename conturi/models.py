@@ -20,11 +20,14 @@ class Profil(models.Model):
 
     statut_UserAprobat = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = "Profile"
+
     def __str__(self):
-        return '%s %s' % (self.user.last_name, self.user.first_name)
+        return '%d %d %s %s %s %s %s' % (self.pk, self.user.id, self.user.first_name, self.user.last_name, self.user.username, self.user.email, self.statut_UserAprobat)
 
     def isApproved(self):
         return self.statut_UserAprobat
 
     def getApproved(self):
-        self.approvalStatus = True
+        self.statut_UserAprobat = True
